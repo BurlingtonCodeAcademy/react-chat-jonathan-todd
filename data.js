@@ -7,9 +7,9 @@ class DataStore {
         this.collName = collectionName
         this.connection = null
 
-        console.log('url: ', url)
-        console.log('dbName: ', dbName)
-        console.log('collection: ', collectionName)
+        //console.log('url: ', url)
+        //console.log('dbName: ', dbName)
+        //console.log('collection: ', collectionName)
     }
 
     async connect() {
@@ -30,22 +30,22 @@ class DataStore {
 
     async readData() {
         let client = await this.connect()
-        console.log('client: ', client)
+        //console.log('client: ', client)
         let db = await client.db(this.dbName)
-        console.log('db: ', db)
+        //console.log('db: ', db)
         const collection = db.collection(this.collName)
-        console.log('collection: ', collection)
+        //console.log('collection: ', collection)
         let dataArr = await collection.find({}).toArray()
-        console.log('dataArr: ', dataArr)
+        //console.log('dataArr: ', dataArr)
         return dataArr
     }
 
-    async addOne(entryObj) {
+    async addOne(entryObject) {
         let client = await this.connect()
         let db = await client.db(this.dbName)
         let collection = await db.collection(this.collName)
 
-        collection.insertOne(entryObj)
+        collection.insertOne(entryObject)
     }
 }
 
