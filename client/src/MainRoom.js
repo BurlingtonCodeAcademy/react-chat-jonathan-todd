@@ -1,29 +1,30 @@
 import React, { useState, useEffect } from "react";
-
-//const [] = useEffect()
+import SinglePost from "./SinglePost";
 
 function Main() {
 	const [post, setPost] = useState([]);
 	useEffect(() => {
-		//let post = false;
-		if (post.length===0) {
-            let postArray = []
-			fetch("http://localhost:8000/get")
+		if (post.length === 0) {
+			let postArray = [];
+			fetch("/get")
 				.then((response) => response.json())
 				.then((postObject) => {
-					console.log(postObject);
-					postObject.forEach(post => {
-                        postArray.push(post)
-                    });
-                    setPost(postArray)
-                });
-                
+					postObject.forEach((post) => {
+						postArray.push(post);
+					});
+					setPost(postArray);
+				});
 		}
-    });
-    console.log(post)
+	});
 	return (
 		<div>
-			<p>{post.length>0 ? post[0].body: null}</p>
+			<p>
+				{post.length > 0
+					? post.map((indivPost) => {
+							return <SinglePost postContent={indivPost}></SinglePost>;
+					  })
+					: null}
+			</p>
 		</div>
 	);
 }
