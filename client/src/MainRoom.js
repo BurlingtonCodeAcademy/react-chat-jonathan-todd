@@ -18,13 +18,10 @@ function Main() {
 	});
 	return (
 		<div>
-			<p>
-				{post.length > 0
-					? post.map((indivPost) => {
-							return <SinglePost postContent={indivPost}></SinglePost>;
-					  })
-					: null}
-			</p>
+		<p>{post.length > 0 ? post.map((indivPost) => {
+		return <SinglePost postContent={indivPost}></SinglePost>;
+		}) : null}
+		</p>
 		</div>
 	);
 }

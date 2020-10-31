@@ -2,8 +2,9 @@ import React from "react";
 
 function PostForm() {
 	return (
-		<form id="form" action="http://localhost:8000/create" method="POST">
-			<input id="firstPost" type="text" placeholder="Type your post here" />
+		<form id="form" action="/create" method="POST">
+			<input id="author" name="author" type="text" placeholder="Your name" />
+			<input id="message" name="message" type="text" placeholder="Type your post here" />
 			<input type="submit" />
 		</form>
 	);

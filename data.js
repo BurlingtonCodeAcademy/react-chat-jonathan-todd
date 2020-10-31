@@ -10,12 +10,12 @@ class DataStore {
 	async connect() {
 		// check if connection already exists
 		if (this.connection && this.connection.isConnected()) {
-			console.log("already exists");
+			console.log("already exists"); //remove line 13 before Moday
 			return this.connection;
 
 			// if not, create connection and return it
 		} else {
-			console.log("creating a new connection");
+			console.log("creating a new connection"); //remove line 18 before Monday
 			const client = await MongoClient.connect(this.url, { useUnifiedTopology: true });
 			this.connection = client;
 			return this.connection;
@@ -34,8 +34,8 @@ class DataStore {
 		let client = await this.connect();
 		let db = await client.db(this.dbName);
 		let collection = await db.collection(this.collName);
-
-		collection.insertOne(entryObject);
+		console.log(entryObject)
+		await collection.insertOne(entryObject);
 	}
 }
 

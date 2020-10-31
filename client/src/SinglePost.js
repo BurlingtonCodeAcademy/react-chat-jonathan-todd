@@ -8,7 +8,7 @@ function SinglePost(props) {
 	}
 	return (
 		<div>
-			{props.postContent.author}:{props.postContent.body}:{parsedTime}
+			{props.postContent.author}:{props.postContent.message}:{parsedTime}
 		</div>
 	);
 }

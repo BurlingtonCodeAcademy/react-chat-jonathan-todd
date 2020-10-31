@@ -15,32 +15,22 @@ app.use(cors());
 
 // Database integration
 const DataStore = require("./data.js");
-let myDb = new DataStore(
-	`mongodb+srv://Jonathan:${process.env.DBPASS}@cluster0.fmoix.mongodb.net/<dbname>?retryWrites=true&w=majority`
-);
-
-let chatDataStore = new DataStore(
-	"mongodb+srv://Jonathan:" +
-		process.env.DBPASS +
-		"@cluster0.fmoix.mongodb.net/jonathan-todd-chat?retryWrites=true&w=majority",
-	"jonathan-todd-chat",
-	"chat-entries"
-);
+let url = `mongodb+srv://Jonathan:${process.env.DBPASS}@cluster0.fmoix.mongodb.net/<dbname>?retryWrites=true&w=majority`
+let myDb = new DataStore(url, "jonathan-todd-chat", "chat-entries");
 
 // --------------------- ROUTES ------------------------------- //
 
 // Route to allow chat messages to be saved to DB
-app.post("/create", (request, response) => {
+app.post("/create", async (request, response) => {
 	let submission = request.body;
-	console.log(request.body);
-	chatDataStore.addOne(submission);
-	response.send(submission);
+	console.log(submission);
+	await myDb.addOne(submission);
+	response.send('/App');
 });
 
 // Route to read chat messages in DB
 app.get("/get", async (request, response) => {
-	let data = await chatDataStore.readData();
-	console.log("Data is: ", data);
+	let data = await myDb.readData();
 	response.send(data);
 });
 
