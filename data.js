@@ -14,11 +14,19 @@ class DataStore {
 
 			// if not, create connection and return it
 		} else {
-			console.log("creating a new connection"); //remove line 18 before Monday
+			console.log("creating a new connection"); //remove line 18 before Monday!
 			const client = await MongoClient.connect(this.url, { useUnifiedTopology: true });
 			this.connection = client;
 			return this.connection;
 		}
+	}
+	async addOne(entryObject, parsedTime) {
+		let client = await this.connect();
+		let db = await client.db(this.dbName);
+		let collection = await db.collection(this.collName);
+		console.log(entryObject)
+		//await collection.insertOne(entryObject);
+		await collection.insertOne({author:entryObject.author, message:entryObject.message, parsedTime})
 	}
 
 	async readData() {
@@ -29,13 +37,6 @@ class DataStore {
 		return dataArr;
 	}
 
-	async addOne(entryObject) {
-		let client = await this.connect();
-		let db = await client.db(this.dbName);
-		let collection = await db.collection(this.collName);
-		console.log(entryObject)
-		await collection.insertOne(entryObject);
-	}
 }
 
 module.exports = DataStore;

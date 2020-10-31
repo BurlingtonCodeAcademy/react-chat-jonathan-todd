@@ -23,8 +23,10 @@ let myDb = new DataStore(url, "jonathan-todd-chat", "chat-entries");
 // Route to allow chat messages to be saved to DB
 app.post("/create", async (request, response) => {
 	let submission = request.body;
-	console.log(submission);
-	await myDb.addOne(submission);
+	//let parsedTime = timestamp.split("T")[1].split(".")[0]
+	let parsedTime = new Date().toLocaleString()
+	console.log(parsedTime);
+	await myDb.addOne(submission, parsedTime);
 	response.redirect('http://localhost:3000');
 });
 
