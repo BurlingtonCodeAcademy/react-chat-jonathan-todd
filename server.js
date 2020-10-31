@@ -25,7 +25,7 @@ app.post("/create", async (request, response) => {
 	let submission = request.body;
 	console.log(submission);
 	await myDb.addOne(submission);
-	response.send('/App');
+	response.redirect('http://localhost:3000');
 });
 
 // Route to read chat messages in DB

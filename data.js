@@ -10,7 +10,6 @@ class DataStore {
 	async connect() {
 		// check if connection already exists
 		if (this.connection && this.connection.isConnected()) {
-			console.log("already exists"); //remove line 13 before Moday
 			return this.connection;
 
 			// if not, create connection and return it
