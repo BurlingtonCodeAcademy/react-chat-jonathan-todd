@@ -5,7 +5,7 @@ function Main() {
 	const [post, setPost] = useState([]);
 	useEffect(() => {
 		if (post.length === 0) {
-			setTimeout(function () {
+			setInterval(function () {
 				getData();
 			}, 10000)
 			getData()
