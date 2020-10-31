@@ -14,8 +14,12 @@ function Main() {
 					});
 					setPost(postArray);
 				});
+				setTimeout(function() {
+					window.location.reload();
+				  }, 10000)
 		}
 	});
+	
 	return (
 		<div>
 		<p>{post.length > 0 ? post.map((indivPost) => {
