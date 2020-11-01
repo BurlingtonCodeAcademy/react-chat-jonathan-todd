@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ChannelEntry from './ChannelEntry'
 
-function Channel() {
+function Channel(props) {
 
 	// Set state
 	const [channels, setChannels] = useState([]);
+	const [channelSelected, setChannelSelected] = useState(null);
 
 	// On page load, read channels from database
 	useEffect(() => {
@@ -27,11 +28,17 @@ function Channel() {
 			});
 	}
 
+	function handleClick(channelName) {
+
+		console.log('called parent', channelName)
+		props.doMainClick(channelName)
+	}
+
 	// Render channels on page
 	return (
 		<div>
 			{channels.length > 0 ? channels.map((indivChannel) => {
-				return <ChannelEntry channelCollection={indivChannel}></ChannelEntry>;
+				return <ChannelEntry callParent = {props.doMainClick} channelCollection={indivChannel}></ChannelEntry>;
 			}) : null}
 		</div>
 	);

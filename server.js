@@ -30,10 +30,11 @@ app.post('/create', async (request, response) => {
 });
 
 // Route to read chat messages for a specific channel
-app.get('/channel-messages', async (request, response) => {
+app.get('/get/:channel', async (request, response) => {
 
 	// read data using channel, which is a query string called channel in URL
-	let data = await myDb.readDataForChannel(request.query.channel);
+	console.log('get channel route, param: ', request.params.channel)
+	let data = await myDb.readDataForChannel(request.params.channel.toLowerCase());
 	response.send(data);
 });
 

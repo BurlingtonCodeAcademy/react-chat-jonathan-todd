@@ -1,14 +1,14 @@
 import React from "react";
 
 function ChannelEntry(props) {
-    
-    function doSomething() {
-        alert('click happened')
-    }
-    
-    
+
+	async function setChannel(channelName) {
+		console.log('in channel entry ', channelName.target.name)
+		await props.callParent(channelName.target.name)
+	}
+      
     return (
-		<button name="channel" onClick={doSomething}>
+		<button name={props.channelCollection.channelName} onClick={setChannel}>
 			{props.channelCollection.channelName}
 		</button>
 	);

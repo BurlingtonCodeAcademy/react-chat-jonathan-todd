@@ -2,32 +2,49 @@ import React, { useState, useEffect } from "react";
 import SinglePost from "./SinglePost";
 import Channel from "./Channel"
 
+
+
 function Main() {
 	const [post, setPost] = useState([]);
+	const [channelSelected, setChannelSelected] = useState('hobbies')
+	const [prevChannel, setPrevChannel] = useState('hobbies')
+	let channel = 'hobbies'
+	
 	useEffect(() => {
 		if (post.length === 0) {
 			setInterval(function () {
-				getData();
+				getData(channelSelected);
 			}, 10000)
-			getData()
+			getData(channelSelected)
+		}
+
+		if (channelSelected != prevChannel) {
+			getData(channelSelected)
 		}
 	});
 
-	function getData() {
+	async function getData(channelName) {
 		let postArray = [];
-		fetch("/get")
+
+		console.log('before fetch: ' + channelName)
+		let url = '/get/'+channelName.toLowerCase()
+		console.log('url ', url)
+
+		await fetch(url)
 			.then((response) => response.json())
 			.then((postObject) => {
 				postObject.forEach((post) => {
 					postArray.push(post);
 				});
 				setPost(postArray);
+				setPrevChannel(channelName)
 			});
 	}
 
 	return (
 		<div>
-			<Channel></Channel>
+			<Channel doMainClick = {setChannelSelected}></Channel>
+	
 			<p>{post.length > 0 ? post.map((indivPost) => {
 				return <SinglePost postContent={indivPost}></SinglePost>;
 			}) : null}
