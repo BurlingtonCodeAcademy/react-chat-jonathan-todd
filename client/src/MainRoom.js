@@ -12,6 +12,7 @@ function Main() {
 	
 	useEffect(() => {
 		if (post.length === 0) {
+		//helper function to splash the recent messages in the chat window after 10 seconds
 			setInterval(function () {
 				getData(channelSelected);
 			}, 10000)
@@ -23,7 +24,8 @@ function Main() {
 		}
 	});
 
-	async function getData(channelName) {
+	//helper function for fetching recent messages and displaying them in the chat window
+	function getData() {
 		let postArray = [];
 
 		console.log('before fetch: ' + channelName)
@@ -42,9 +44,9 @@ function Main() {
 	}
 
 	return (
-		<div>
-			<Channel doMainClick = {setChannelSelected}></Channel>
-	
+		//chat window that shows in the browser (same style of window for each Channel)
+		<div id="chat-window">
+			<Channel></Channel>
 			<p>{post.length > 0 ? post.map((indivPost) => {
 				return <SinglePost postContent={indivPost}></SinglePost>;
 			}) : null}
