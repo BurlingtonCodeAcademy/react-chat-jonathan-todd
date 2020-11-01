@@ -4,7 +4,7 @@ function ChannelEntry(props) {
 
 	async function setChannel(channelName) {
 		console.log('in channel entry ', channelName.target.name)
-		await props.callParent(channelName.target.name)
+		await props.setChannelState(channelName.target.name)
 	}
       
     return (

@@ -8,11 +8,5 @@ function SinglePost(props) {
 		</div>
 	);
 }
-<<<<<<< HEAD
 
 export default SinglePost;
-
-=======
-
-export default SinglePost;
->>>>>>> d7043615d2fe34b7abe9656eccbe5f2e67abdc3b

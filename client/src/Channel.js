@@ -38,7 +38,7 @@ function Channel(props) {
 	return (
 		<div id="channel-bar">
 			{channels.length > 0 ? channels.map((indivChannel) => {
-				return <ChannelEntry callParent = {props.doMainClick} channelCollection={indivChannel}></ChannelEntry>;
+				return <ChannelEntry setChannelState = {props.doMainClick} channelCollection={indivChannel}></ChannelEntry>;
 			}) : null}
 		</div>
 	);

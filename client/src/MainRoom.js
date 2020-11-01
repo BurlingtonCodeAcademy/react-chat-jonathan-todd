@@ -13,23 +13,23 @@ function Main() {
 	useEffect(() => {
 		if (post.length === 0) {
 		//helper function to splash the recent messages in the chat window after 10 seconds
-			setInterval(function () {
+			setTimeout(function () {
 				getData(channelSelected);
 			}, 10000)
 			getData(channelSelected)
 		}
 
-		if (channelSelected != prevChannel) {
+		if (channelSelected !== prevChannel) {
 			getData(channelSelected)
 		}
 	});
 
 	//helper function for fetching recent messages and displaying them in the chat window
-	function getData() {
+	async function getData() {
 		let postArray = [];
 
-		console.log('before fetch: ' + channelName)
-		let url = '/get/'+channelName.toLowerCase()
+		console.log('before fetch: ', channelSelected)
+		let url = '/get/'+channelSelected.toLowerCase()
 		console.log('url ', url)
 
 		await fetch(url)
@@ -38,15 +38,16 @@ function Main() {
 				postObject.forEach((post) => {
 					postArray.push(post);
 				});
+				console.log('Main channel selected: ' + channelSelected)
 				setPost(postArray);
-				setPrevChannel(channelName)
+				setPrevChannel(channelSelected)
 			});
 	}
 
 	return (
 		//chat window that shows in the browser (same style of window for each Channel)
 		<div id="chat-window">
-			<Channel></Channel>
+			<Channel doMainClick={setChannelSelected}></Channel>
 			<p>{post.length > 0 ? post.map((indivPost) => {
 				return <SinglePost postContent={indivPost}></SinglePost>;
 			}) : null}
