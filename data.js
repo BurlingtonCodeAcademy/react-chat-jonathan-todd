@@ -7,6 +7,8 @@ class DataStore {
 		this.collName = collectionName;
 		this.connection = null;
 	}
+
+	// Establish a connection to Mongo DB
 	async connect() {
 		// check if connection already exists
 		if (this.connection && this.connection.isConnected()) {
@@ -20,6 +22,8 @@ class DataStore {
 			return this.connection;
 		}
 	}
+
+	// Add a post entry to DB
 	async addOne(entryObject, parsedTime) {
 		let client = await this.connect();
 		let db = await client.db(this.dbName);
@@ -29,6 +33,7 @@ class DataStore {
 		await collection.insertOne({author:entryObject.author, message:entryObject.message, parsedTime})
 	}
 
+	// Read all Chat Posts
 	async readData() {
 		let client = await this.connect();
 		let db = await client.db(this.dbName);
@@ -37,6 +42,17 @@ class DataStore {
 		return dataArr;
 	}
 
+	// Read Posts for a specific channel
+	async readDataForChannel(channelName) {
+		console.log('Query Parameter: ', channelName)
+		let client = await this.connect();
+		let db = await client.db(this.dbName);
+		const collection = db.collection(this.collName);
+		let dataArr = await collection.find({'channelName': channelName}).toArray();
+		return dataArr;
+	}
+
+	// Read the list of channels available for users to post in
 	async readChannels() {
 		let client = await this.connect();
 		let db = await client.db(this.dbName);
@@ -44,7 +60,6 @@ class DataStore {
 		let dataArr = await collection.find({}).toArray();
 		return dataArr;
 	}
-
 }
 
 module.exports = DataStore;
