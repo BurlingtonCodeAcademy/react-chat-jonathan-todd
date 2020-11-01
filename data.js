@@ -37,6 +37,14 @@ class DataStore {
 		return dataArr;
 	}
 
+	async readChannels() {
+		let client = await this.connect();
+		let db = await client.db(this.dbName);
+		const collection = db.collection(this.collName);
+		let dataArr = await collection.find({}).toArray();
+		return dataArr;
+	}
+
 }
 
 module.exports = DataStore;
