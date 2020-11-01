@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import SinglePost from "./SinglePost";
 import Channel from "./Channel"
-
-
+import PostForm from "./PostForm"
 
 function Main() {
 	const [post, setPost] = useState([]);
-	const [channelSelected, setChannelSelected] = useState('hobbies')
-	const [prevChannel, setPrevChannel] = useState('hobbies')
-	let channel = 'hobbies'
+	const [channelSelected, setChannelSelected] = useState('general')
+	const [prevChannel, setPrevChannel] = useState('general')
 	
 	useEffect(() => {
 		if (post.length === 0) {
@@ -39,6 +37,7 @@ function Main() {
 					postArray.push(post);
 				});
 				console.log('Main channel selected: ' + channelSelected)
+				console.log('Fetch Array is ', postArray)
 				setPost(postArray);
 				setPrevChannel(channelSelected)
 			});
@@ -52,6 +51,7 @@ function Main() {
 				return <SinglePost postContent={indivPost}></SinglePost>;
 			}) : null}
 			</p>
+			<PostForm channel={channelSelected}></PostForm>
 		</div>
 	);
 }

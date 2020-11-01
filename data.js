@@ -28,7 +28,7 @@ class DataStore {
 		let db = await client.db(this.dbName);
 		let collection = await db.collection(this.collName);
 		//await collection.insertOne(entryObject);
-		await collection.insertOne({author:entryObject.author, message:entryObject.message, parsedTime})
+		await collection.insertOne({author:entryObject.author, message:entryObject.message, channelName:entryObject.channel.toLowerCase(), parsedTime})
 	}
 
 	// Read all Chat Posts
@@ -47,6 +47,7 @@ class DataStore {
 		const collection = db.collection(this.collName);
 		console.log('in readDataForChannel', channelName)
 		let dataArr = await collection.find({'channelName': channelName}).toArray();
+		console.log('server read: ', dataArr)
 		return dataArr;
 	}
 

@@ -33,9 +33,10 @@ button:hover {
     background-color: whitesmoke;
     border: 2px solid black;
     height: 40vh;
-    overflow: scroll;
+   /* overflow: scroll; */
 
 }
+
 
 /* ------ styles for the user's chat form ------ */
 
@@ -52,4 +53,8 @@ button:hover {
 #message {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: .7rem;
+}
+
+#submit-button {
+    width: 10vw;
 }
