@@ -9,7 +9,6 @@ import "./App.css";
 function App() {
 	return (
 		<div className="App">
-			<Channel></Channel>
 			<Main></Main>
 			<PostForm></PostForm>
 		</div>

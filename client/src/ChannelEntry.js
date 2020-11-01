@@ -1,10 +1,16 @@
 import React from "react";
 
 function ChannelEntry(props) {
-	return (
-		<li>
+    
+    function doSomething() {
+        alert('click happened')
+    }
+    
+    
+    return (
+		<button name="channel" onClick={doSomething}>
 			{props.channelCollection.channelName}
-		</li>
+		</button>
 	);
 }
 

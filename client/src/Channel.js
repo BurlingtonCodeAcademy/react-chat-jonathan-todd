@@ -29,11 +29,11 @@ function Channel() {
 
 	// Render channels on page
 	return (
-		<ul>
+		<div>
 			{channels.length > 0 ? channels.map((indivChannel) => {
 				return <ChannelEntry channelCollection={indivChannel}></ChannelEntry>;
 			}) : null}
-		</ul>
+		</div>
 	);
 }
 

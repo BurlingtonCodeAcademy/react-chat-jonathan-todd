@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SinglePost from "./SinglePost";
+import Channel from "./Channel"
 
 function Main() {
 	const [post, setPost] = useState([]);
@@ -26,6 +27,7 @@ function Main() {
 
 	return (
 		<div>
+			<Channel></Channel>
 			<p>{post.length > 0 ? post.map((indivPost) => {
 				return <SinglePost postContent={indivPost}></SinglePost>;
 			}) : null}
