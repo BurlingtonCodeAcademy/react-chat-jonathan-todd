@@ -16,7 +16,6 @@ class DataStore {
 
 			// if not, create connection and return it
 		} else {
-			console.log("creating a new connection"); //remove line 18 before Monday!
 			const client = await MongoClient.connect(this.url, { useUnifiedTopology: true });
 			this.connection = client;
 			return this.connection;
@@ -28,7 +27,6 @@ class DataStore {
 		let client = await this.connect();
 		let db = await client.db(this.dbName);
 		let collection = await db.collection(this.collName);
-		console.log(entryObject)
 		//await collection.insertOne(entryObject);
 		await collection.insertOne({author:entryObject.author, message:entryObject.message, parsedTime})
 	}
@@ -42,9 +40,8 @@ class DataStore {
 		return dataArr;
 	}
 
-	// Read Posts for a specific channel
+	// Read Chat Posts for a specific channel
 	async readDataForChannel(channelName) {
-		console.log('Query Parameter: ', channelName)
 		let client = await this.connect();
 		let db = await client.db(this.dbName);
 		const collection = db.collection(this.collName);
