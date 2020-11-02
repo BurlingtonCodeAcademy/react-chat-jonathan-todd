@@ -22,18 +22,17 @@ let channelDB = new DataStore(url, "jonathan-todd-chat", "channels");
 // --------------------- ROUTES ------------------------------- //
 
 // Route to allow chat messages to be saved to DB
-app.post('/create', async (request, response) => {
+app.post('/create/:channel', async (request, response) => {
 	let submission = request.body;
 	let parsedTime = new Date().toLocaleString()
 	await myDb.addOne(submission, parsedTime);
-	response.redirect('http://localhost:3000');
+	response.redirect('http://localhost:3000/'+request.params.channel);
 });
 
 // Route to read chat messages for a specific channel
 app.get('/get/:channel', async (request, response) => {
 
 	// read data using channel, which is a query string called channel in URL
-	console.log('get channel route, param: ', request.params.channel)
 	let data = await myDb.readDataForChannel(request.params.channel.toLowerCase());
 	response.send(data);
 });

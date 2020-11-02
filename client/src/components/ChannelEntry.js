@@ -2,13 +2,13 @@ import React from "react";
 
 function ChannelEntry(props) {
 
-	async function setChannel(channelName) {
-		console.log('in channel entry ', channelName.target.name)
-		await props.setChannelState(channelName.target.name)
+ function setChannel(channelName) {
+		props.setChannelState(channelName.toLowerCase())
+		document.cookie = "channelName="+channelName.toLowerCase(); 
 	}
       
     return (
-		<button name={props.channelCollection.channelName} onClick={setChannel}>
+		<button id="channel-link" name={props.channelCollection.channelName} onClick={(evt)=> setChannel(evt.target.name)}>
 			{props.channelCollection.channelName}
 		</button>
 	);
