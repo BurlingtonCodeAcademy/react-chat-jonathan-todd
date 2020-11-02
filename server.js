@@ -22,11 +22,13 @@ let channelDB = new DataStore(url, "jonathan-todd-chat", "channels");
 // --------------------- ROUTES ------------------------------- //
 
 // Route to allow chat messages to be saved to DB
-app.post('/create', async (request, response) => {
+app.post('/create/:channel', async (request, response) => {
+	console.log('top of server create')
 	let submission = request.body;
 	let parsedTime = new Date().toLocaleString()
 	await myDb.addOne(submission, parsedTime);
-	response.redirect('http://localhost:3000');
+	/*
+	response.redirect('http://localhost:3000/'+request.params.channel); */
 });
 
 // Route to read chat messages for a specific channel
