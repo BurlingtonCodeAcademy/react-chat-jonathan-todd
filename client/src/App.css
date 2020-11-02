@@ -8,12 +8,14 @@ body {
 
 #channel-bar {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
+    position: absolute;
+    margin-top: 2vh;
+    background-color: gray;
 }
 
 button {
-    background-color: green;
+    background-color: gray;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 20px;
 }
@@ -32,27 +34,56 @@ button:hover {
 #chat-window {
     background-color: whitesmoke;
     border: 2px solid black;
-    height: 40vh;
-   /* overflow: scroll; */
+    height: 70vh;
+    width: 82vh;
+    overflow: auto;
+}
 
+#lower-pane {
+    display: flex;
+}
+
+#channel-buttons {
+    margin-top: 3vh;
 }
 
 
 /* ------ styles for the user's chat form ------ */
 
+#form-wrapper {
+    display: flex;
+    margin-bottom: 50vh;
+}
+
 #form {
     display: flex;
+}
+
+#channel-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+#channel-title {
+    font-size: .9rem;
+    font-weight: bold;
+    color: green;
+}
+
+#channel-link {
+    font-size: .9rem;
 }
 
 #author {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: .7rem;
 }
 
 #message {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: .7rem;
+    width: 50vh;
 }
 
 #submit-button {

@@ -4,33 +4,41 @@ import Channel from "./Channel"
 import PostForm from "./PostForm"
 
 function Main(props) {
+
+	// Setup state variable to track user posts using an array
 	const [post, setPost] = useState([]);
-	const [render, setRender] = useState(1)
 
-	console.log('At top of Main', props.channelSelected)
-	console.log('At top of Main prev channel', props.channelSelected)
-	
+	// Each time the page loads
 	useEffect(() => {
+
+		// A cookie is being used to preserve the channel a user is in 
+		let channel = document.cookie.split('; ').find(row => row.startsWith('channel')).split('=')[1];
+		let prevChannel = document.cookie.split('; ').find(row => row.startsWith('channel')).split('=')[1];
+
+		// Fetch post data for current channel if post array is empty
 		if (post.length === 0) {
-		//helper function to splash the recent messages in the chat window after 10 seconds
-			setTimeout(function () {
-				getData(props.channelSelected);
-			}, 10000)
-			getData(props.channelSelected)
+			getData(channel)
 		}
 
+		// Set a timeout to read data every 10 seconds
+		const timeout = window.setTimeout(function () {
+			getData(channel);
+		}, 10000)
+
+		 
 		if (props.channelSelected !== props.prevChannel) {
-			getData(props.channelSelected)
+			getData(channel)
+			prevChannel = channel
 		}
+		
+		window.clearInterval(timeout);
+		
 	});
 
-	//helper function for fetching recent messages and displaying them in the chat window
-	async function getData() {
+	//helper function for fetching recent messages 
+	async function getData(channel) {
 		let postArray = [];
-
-		console.log('before fetch: ', props.channelSelected)
-		let url = '/get/'+props.channelSelected.toLowerCase()
-		console.log('url ', url)
+		let url = '/get/' + channel.toLowerCase()
 
 		await fetch(url)
 			.then((response) => response.json())
@@ -38,27 +46,35 @@ function Main(props) {
 				postObject.forEach((post) => {
 					postArray.push(post);
 				});
-				console.log('Main channel selected: ' + props.channelSelected)
-				console.log('Fetch Array is ', postArray)
 				setPost(postArray);
-				props.setPrevChannel(props.channelSelected)
+				props.setPrevChannel(channel)
 			});
 	}
 
-	function renderHandler() {
-		setRender(2)
-	}
-
+	// Render the page
 	return (
 		//chat window that shows in the browser (same style of window for each Channel)
-		<div id="chat-window">
-			<Channel doMainClick={props.setChannelSelected}></Channel>
-			<p>{post.length > 0 ? post.map((indivPost) => {
-				return <SinglePost postContent={indivPost}></SinglePost>;
-			}) : null}
-			</p>
-			<PostForm channelSelected={props.channelSelected} render={renderHandler}></PostForm>
+		<div id="message-pane">
+			<h1 id="channel-title">Channel: {props.channelSelected.toUpperCase()}</h1>
+			<div id="chat-window">
+
+				<p>{post.length > 0 ? post.map((indivPost) => {
+					return <SinglePost postContent={indivPost}></SinglePost>;
+				}) : null}
+				</p>
+			</div>
+
+			<div id="lower-pane">
+				<div id="channel-buttons">
+					<Channel doMainClick={props.setChannelSelected}></Channel>
+				</div>
+
+				<div id="form-wrapper">
+					<PostForm channelSelected={props.channelSelected}></PostForm>
+				</div>
+			</div>
 		</div>
+
 	);
 }
 

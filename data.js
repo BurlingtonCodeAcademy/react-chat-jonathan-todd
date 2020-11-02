@@ -45,9 +45,7 @@ class DataStore {
 		let client = await this.connect();
 		let db = await client.db(this.dbName);
 		const collection = db.collection(this.collName);
-		console.log('in readDataForChannel', channelName)
 		let dataArr = await collection.find({'channelName': channelName}).toArray();
-		console.log('server read: ', dataArr)
 		return dataArr;
 	}
 

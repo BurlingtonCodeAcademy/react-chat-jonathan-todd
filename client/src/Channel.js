@@ -5,7 +5,7 @@ function Channel(props) {
 
 	// Set state
 	const [channels, setChannels] = useState([]);
-	const [channelSelected, setChannelSelected] = useState(null);
+//	const [channelSelected, setChannelSelected] = useState(null);
 
 	// On page load, read channels from database
 	useEffect(() => {
@@ -28,19 +28,13 @@ function Channel(props) {
 			});
 	}
 
-	function handleClick(channelName) {
-
-		console.log('called parent', channelName)
-		props.doMainClick(channelName)
-	}
-
 	// Render channels on page
 	return (
-		<div id="channel-bar">
-			{channels.length > 0 ? channels.map((indivChannel) => {
-				return <ChannelEntry setChannelState = {props.doMainClick} channelCollection={indivChannel}></ChannelEntry>;
-			}) : null}
-		</div>
+			<div id="channel-bar">
+				{channels.length > 0 ? channels.map((indivChannel) => {
+					return <ChannelEntry setChannelState={props.doMainClick} channelCollection={indivChannel}></ChannelEntry>;
+				}) : null}
+			</div>
 	);
 }
 

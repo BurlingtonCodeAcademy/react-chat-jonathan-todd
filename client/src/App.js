@@ -1,16 +1,14 @@
 import React, {useState} from "react";
 import Main from "./MainRoom";
-import PostForm from "./PostForm";
-import Channel from "./Channel";
 import "./App.css";
-//import more room components like line 2 (perhaps just two more)
-//install & import react-router-dom ???
 
 function App() {
 
-	const [channelSelected, setChannelSelected] = useState('hobbies')
-	const [prevChannel, setPrevChannel] = useState('hobbies')
-	console.log('In App, channel selected: ', channelSelected)
+	// Setup state variables to track channel, default user to general channel when the app. starts
+	const [channelSelected, setChannelSelected] = useState('general')
+	const [prevChannel, setPrevChannel] = useState('general')
+	
+	// Render the Main Panel.  Main panel contains the major components that make up the chat app
 	return (
 		<div className="App">
 			<Main setChannelSelected={setChannelSelected} channelSelected={channelSelected} setPrevChannel={setPrevChannel} prevChannel={prevChannel}></Main>
