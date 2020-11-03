@@ -25,7 +25,6 @@ function Main(props) {
 			getData(channel);
 		}, 10000)
 
-		 
 		if (props.channelSelected !== props.prevChannel) {
 			getData(channel)
 			prevChannel = channel
