@@ -1,6 +1,8 @@
 body {
     margin: 0;
     padding: 0;
+    width: 100vw;
+    height: 100vh;
     background-color: rgb(245, 204, 179);
 }
 
@@ -33,9 +35,9 @@ button:hover {
 
 #chat-window {
     background-color: whitesmoke;
-    border: 2px solid black;
     height: 70vh;
-    width: 82vh;
+    width: 82vw;
+    margin-left: 2vw;
     overflow: auto;
 }
 
@@ -45,6 +47,7 @@ button:hover {
 
 #channel-buttons {
     margin-top: 3vh;
+    margin-left: 2vw;
 }
 
 
@@ -71,7 +74,8 @@ button:hover {
 }
 
 #channel-link {
-    font-size: .9rem;
+    font-size: 16pt;
+    background-color: lightcoral
 }
 
 #author {

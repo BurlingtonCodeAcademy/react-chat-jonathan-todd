@@ -19,7 +19,7 @@ let url = `mongodb+srv://Jonathan:${process.env.DBPASS}@cluster0.fmoix.mongodb.n
 let myDb = new DataStore(url, "jonathan-todd-chat", "chat-entries");
 let channelDB = new DataStore(url, "jonathan-todd-chat", "channels");
 
-// --------------------- ROUTES ------------------------------- //
+// --------------------- ROUTE 	S ------------------------------- //
 
 // Route to allow chat messages to be saved to DB
 app.post('/create/:channel', async (request, response) => {
@@ -41,7 +41,7 @@ app.get('/get/:channel', async (request, response) => {
 app.get('/get', async (request, response) => {
 	let data = await myDb.readData();
 	response.send(data);
-});
+}); 	
 
 // Route to read available channels in DB
 app.get('/channels', async (request, response) => {

@@ -1,20 +1,33 @@
-import React, {useState } from "react";
-import Main from "./components/MainRoom";
+import React, { useState } from "react";
+import Channel from "./components/Channel";
+import MainRoom from "./components/MainRoom"
+import PostForm from "./components/PostForm" 	
 import "./App.css";
 
 function App() {
 
-	// A cookie is being used to preserve the channel a user is in 
-//	let channel = document.cookie.split('; ').find(row => row.startsWith('channel')).split('=')[1];
-
 	// Setup state variables to track channel, default user to general channel when the app. starts
-	const [channelSelected, setChannelSelected] = useState('general')
-	const [prevChannel, setPrevChannel] = useState('general')
-	
+	const [channel, setChannel] = useState(null)
+
 	// Render the Main Panel.  Main panel contains the major components that make up the chat app
 	return (
-		<div className="App">
-			<Main setChannelSelected={setChannelSelected} channelSelected={channelSelected} setPrevChannel={setPrevChannel} prevChannel={prevChannel}></Main>
+		<div id="message-pane">
+
+			<div id="chat-window">
+				<h1>Channel: {channel===null ? 'general' : channel}</h1>
+				<MainRoom channel={channel}></MainRoom>
+			</div>
+
+			<div id="lower-pane">
+				<div id="channel-buttons">
+					<Channel setChannel={setChannel}></Channel>
+				</div>
+
+				<div id="form-wrapper">
+					<PostForm channel={channel}></PostForm>
+				</div>
+			</div>
+)
 		</div>
 	);
 }

@@ -3,8 +3,12 @@ import React from "react";
 function ChannelEntry(props) {
 
  function setChannel(channelName) {
-		props.setChannelState(channelName.toLowerCase())
-		document.cookie = "channelName="+channelName.toLowerCase(); 
+
+		// Save selected channel in state
+		props.setChannel(channelName.toLowerCase())
+
+		// save selected channel in local storage
+		window.localStorage.setItem('channel', channelName);
 	}
       
     return (

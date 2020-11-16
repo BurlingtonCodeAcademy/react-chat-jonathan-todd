@@ -1,77 +1,56 @@
 import React, { useState, useEffect } from "react";
 import SinglePost from "./SinglePost";
-import Channel from "./Channel"
-import PostForm from "./PostForm"
 
 function Main(props) {
 
 	// Setup state variable to track user posts using an array
-	const [post, setPost] = useState([]);
+	const [post, setPost] = useState([])
+	const [postChannel, setPostChannel] = useState(null)
 
 	// Each time the page loads
 	useEffect(() => {
 
-		// A cookie is being used to preserve the channel a user is in 
-		let channel = document.cookie.split('; ').find(row => row.startsWith('channel')).split('=')[1];
-		let prevChannel = document.cookie.split('; ').find(row => row.startsWith('channel')).split('=')[1];
-
-		// Fetch post data for current channel if post array is empty
-		if (post.length === 0) {
-			getData(channel)
-		}
+		// Fetch post data for current channel if post array is empty or different channel is selected
+		if (post.length === 0 ||
+			props.channel !== postChannel)
+		 	getData()
 
 		// Set a timeout to read data every 10 seconds
 		const timeout = window.setTimeout(function () {
-			getData(channel);
+			getData(props.channel);
 		}, 10000)
 
-		if (props.channelSelected !== props.prevChannel) {
-			getData(channel)
-			prevChannel = channel
-		}
-		
 		window.clearInterval(timeout);
-		
+
 	});
 
-	//helper function for fetching recent messages 
-	async function getData(channel) {
-		let postArray = [];
-		let url = '/get/' + channel.toLowerCase()
+	function getData() {
 
-		await fetch(url)
+		let postArray = [];
+
+		// if channel is not stored in local storage yet, set to general as default otherwise use storage value
+		let url = window.localStorage.getItem('channel') === null ? 'get/general' : '/get/' + window.localStorage.getItem('channel')
+	
+		fetch(url)
 			.then((response) => response.json())
 			.then((postObject) => {
 				postObject.forEach((post) => {
 					postArray.push(post);
 				});
 				setPost(postArray);
-				props.setPrevChannel(channel)
+				setPostChannel(props.channel)
 			});
 	}
 
 	// Render the page
 	return (
 		//chat window that shows in the browser (same style of window for each Channel)
-		<div id="message-pane">
-			<h1 id="channel-title">Channel: {props.channelSelected.toUpperCase()}</h1>
-			<div id="chat-window">
 
-				<p>{post.length > 0 ? post.map((indivPost) => {
-					return <SinglePost postContent={indivPost}></SinglePost>;
-				}) : null}
-				</p>
-			</div>
-
-			<div id="lower-pane">
-				<div id="channel-buttons">
-					<Channel doMainClick={props.setChannelSelected}></Channel>
-				</div>
-
-				<div id="form-wrapper">
-					<PostForm channelSelected={props.channelSelected}></PostForm>
-				</div>
-			</div>
+		<div id="chat-window">
+			<p>{post.length > 0 ? post.map((indivPost) => {
+				return <SinglePost postContent={indivPost}></SinglePost>;
+			}) : null}
+			</p>
 		</div>
 
 	);

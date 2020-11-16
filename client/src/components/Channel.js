@@ -5,7 +5,6 @@ function Channel(props) {
 
 	// Set state
 	const [channels, setChannels] = useState([]);
-//	const [channelSelected, setChannelSelected] = useState(null);
 
 	// On page load, read channels from database
 	useEffect(() => {
@@ -23,7 +22,6 @@ function Channel(props) {
 				channelObject.forEach((channel) => {
 					channelArray.push(channel);
 				});
-				console.log(channelArray)
 				setChannels(channelArray);
 			});
 	}
@@ -32,7 +30,7 @@ function Channel(props) {
 	return (
 			<div id="channel-bar">
 				{channels.length > 0 ? channels.map((indivChannel) => {
-					return <ChannelEntry setChannelState={props.doMainClick} channelCollection={indivChannel}></ChannelEntry>;
+					return <ChannelEntry setChannel={props.setChannel} channelCollection={indivChannel}></ChannelEntry>;
 				}) : null}
 			</div>
 	);
