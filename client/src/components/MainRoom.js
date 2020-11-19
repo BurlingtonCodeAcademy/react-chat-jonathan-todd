@@ -20,7 +20,7 @@ function Main(props) {
 			getData(props.channel);
 		}, 10000)
 
-		window.clearInterval(timeout);
+		//window.clearInterval(timeout);
 
 	});
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Channel from "./components/Channel";
 import MainRoom from "./components/MainRoom"
-import PostForm from "./components/PostForm" 	
+import PostForm from "./components/PostForm"
 import "./App.css";
 
 function App() {
@@ -10,14 +10,14 @@ function App() {
 	const [channel, setChannel] = useState(null)
 
 	let lastChannel = window.localStorage.getItem('channel')
-	console.log('In App: ' + lastChannel)
 
 	// Render the Main Panel.  Main panel contains the major components that make up the chat app
 	return (
 		<div id="message-pane">
 
+			<h1>Channel: {lastChannel === null ? 'general' : lastChannel}</h1>
 			<div id="chat-window">
-				<h1>Channel: {lastChannel===null ? 'general' : lastChannel}</h1>
+
 				<MainRoom channel={channel}></MainRoom>
 			</div>
 

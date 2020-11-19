@@ -2,6 +2,16 @@ import React, { useState, useEffect } from "react";
 
 function PostForm(props) {
 
+	const [user, setUser] = useState(null)
+
+	useEffect(() => {
+
+		// save user in local storage
+	//	window.localStorage.setItem('user', user);
+
+	});
+
+
 	// Render the form to allow user to post a chat entry
 	return (
 		//the general form for making a chat post
