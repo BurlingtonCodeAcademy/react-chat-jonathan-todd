@@ -39,6 +39,8 @@ button:hover {
     width: 82vw;
     margin-left: 2vw;
     overflow: auto;
+    overflow-x: hidden;
+     overflow-y: auto;
 }
 
 #lower-pane {

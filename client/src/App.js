@@ -9,12 +9,15 @@ function App() {
 	// Setup state variables to track channel, default user to general channel when the app. starts
 	const [channel, setChannel] = useState(null)
 
+	let lastChannel = window.localStorage.getItem('channel')
+	console.log('In App: ' + lastChannel)
+
 	// Render the Main Panel.  Main panel contains the major components that make up the chat app
 	return (
 		<div id="message-pane">
 
 			<div id="chat-window">
-				<h1>Channel: {channel===null ? 'general' : channel}</h1>
+				<h1>Channel: {lastChannel===null ? 'general' : lastChannel}</h1>
 				<MainRoom channel={channel}></MainRoom>
 			</div>
 
