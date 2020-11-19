@@ -1,12 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Channel from "./components/Channel";
+import MainRoom from "./components/MainRoom"
+import PostForm from "./components/PostForm"
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Hello, Chat!</h1>
-    </div>
-  );
+
+	// Setup state variables to track channel, default user to general channel when the app. starts
+	const [channel, setChannel] = useState(null)
+
+	let lastChannel = window.localStorage.getItem('channel')
+
+	// Render the Main Panel.  Main panel contains the major components that make up the chat app
+	return (
+		<div id="message-pane">
+
+			<h1>Channel: {lastChannel === null ? 'general' : lastChannel}</h1>
+			<div id="chat-window">
+
+				<MainRoom channel={channel}></MainRoom>
+			</div>
+
+			<div id="lower-pane">
+				<div id="channel-buttons">
+					<Channel setChannel={setChannel}></Channel>
+				</div>
+
+				<div id="form-wrapper">
+					<PostForm channel={channel}></PostForm>
+				</div>
+			</div>
+)
+		</div>
+	);
 }
 
 export default App;

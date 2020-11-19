@@ -1,38 +1,97 @@
-.App {
-  text-align: center;
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(245, 204, 179);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* ------ styles for channel bar display above chat window ------ */
+
+#channel-bar {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    margin-top: 2vh;
+    background-color: gray;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+button {
+    background-color: gray;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+button:link {
+    color: gold;
+    text-decoration: none;
 }
 
-.App-link {
-  color: #61dafb;
+button:hover {
+    cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* ------ chat window styles ------ */
+
+#chat-window {
+    background-color: whitesmoke;
+    height: 70vh;
+    width: 82vw;
+    margin-left: 2vw;
+    overflow: auto;
+    overflow-x: hidden;
+     overflow-y: auto;
+}
+
+#lower-pane {
+    display: flex;
+}
+
+#channel-buttons {
+    margin-top: 3vh;
+    margin-left: 2vw;
+}
+
+
+/* ------ styles for the user's chat form ------ */
+
+#form-wrapper {
+    display: flex;
+    margin-bottom: 50vh;
+}
+
+#form {
+    display: flex;
+}
+
+#channel-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+#channel-title {
+    font-size: .9rem;
+    font-weight: bold;
+    color: green;
+}
+
+#channel-link {
+    font-size: 16pt;
+    background-color: lightcoral
+}
+
+#author {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: .7rem;
+}
+
+#message {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: .7rem;
+    width: 50vh;
+}
+
+#submit-button {
+    width: 10vw;
 }
